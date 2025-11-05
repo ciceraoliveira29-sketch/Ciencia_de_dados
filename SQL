@@ -1,0 +1,98 @@
+use vendas_dimensional;
+create table categoria(
+id bigint primary key comment 'Indentificador categoria',
+categoria varchar(200)) comment 'nome da categoria';
+
+create table cliente(
+id bigint primary key comment 'Indentificador cliente',
+    nomecliente varchar(200) not null,
+    sexocodigo char(1),
+    sexo_descricao varchar(45),
+    profissao varchar(200) not null,
+    email varchar(400)not null,
+    proverdordocliente varchar(45) not null,
+    nascimento date not null,
+    cadastro date,
+    enderecocompleto varchar(450),
+    codnacionalidade varchar(45),
+    nacionalidade varchar(45)
+    );
+    
+    create table fornecedor(
+    id bigint primary key comment 'Identificador do fornecedor',
+	fornecedor varchar(200) not null comment 'nome da empresa',
+	contato varchar(200) not null comment 'Telefone do fornecedor'
+    );
+    
+    create table item(
+    id bigint primary key comment 'Identificador da venda',
+    qtd_vendida int not null comment 'Quantidade de venda do item',
+    preco_unitario_na_venda float not null comment 'preço unitario no momento da venda',
+    valorfrete float default 0 comment 'Valor pago pelo frete',
+    valordesconto float default 0 comment 'Valor concedido de desconto',
+    valorcomissao float default 0 comment 'Valor recebido de comissao',
+	  tempopedido bigint not null comment 'Data do pedido',
+    tempo_de_pagamento bigint comment 'Data do pagamento',
+    tempo_previsao bigint comment ' Previsao de entrega',
+    tempo_de_envio bigint comment ' data de envio',
+    tempo_de_entrega bigint comment 'data da entrega',
+    idcliente bigint not null comment ' Cliente que realizou a compra',
+    pais_moradia_cliente bigint comment 'Pais onde o cliente mora',
+    pais_nacionalidade_cliente bigint comment 'Pais de nacionallidade',
+    pais_destino bigint not null comment 'Pais de destino',
+    pais_transportadora bigint not null comment 'Transportadora responsavel pela entrega',
+    pais_vendedor bigint not null comment 'Vendedor responsavel pela venda',
+    pais_fornecedor bigint not null comment 'Fornecedor do produto',
+    idcategoria bigint not null comment 'Categoria do produto',
+    idproduto bigint not null comment 'Produto vendido'
+    );
+    
+    create table pais(
+    id bigint primary key comment 'Indentificador único pais',
+    sigla char(2) not null,
+    pais varchar(100) not null
+    );
+    
+   create table produto(
+   id int primary key comment 'Indentificador único do item',
+    produto varchar(200) comment 'Nome do produto',
+    preco_unitario float,
+    descontinuado tinyint
+    );
+    
+    create table tempo(
+    id bigint primary key comment 'Indentificador unico e obrigátorio',
+	data date,
+	dia int not null,
+	ano int not null,
+	data_juliana varchar(45) not null,
+	semestre int not null,
+	quadrimestre int not null,
+	trimestre int not null,
+	bimestre int not null,
+	nomemes varchar(45) not null,
+	diadasemana int not null,
+	nomediadasemana varchar(45) not null,
+	semanadoano varchar(45) not null,
+	datastring char(10) not null,
+	dianoano int not null,
+	ultimodiames int not null,
+    fimdesemana tinyint not null
+    );
+    
+create table transportadora(
+id bigint primary key comment 'Indentificador da transportadora',
+transportadora varchar(200) not null comment 'Nome da transportadora',
+contato varchar(200) not null comment 'Tem ligação com fornecedores'
+);
+
+create table vendedor(
+id bigint primary key comment 'Indentificador do vendedor',
+nome varchar(200) not null comment 'Nome do vendedor',
+sexo_codigo char(1) comment 'M/F/N',
+sexo_descricao varchar(400) comment 'Descrição do sexo',
+nascimento date not null,
+contrato date not null comment 'Data do contrato',
+supervisor varchar(200) comment 'Nome do supervisor'
+);
+    
